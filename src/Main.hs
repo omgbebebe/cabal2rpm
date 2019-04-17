@@ -54,7 +54,6 @@ defTree t fs = simplifyCondTree toDef t
 parseDeps :: GenericPackageDescription -> PkgInfo
 parseDeps d =
   let pd = packageDescription d
-      ls = case condLibrary d of Nothing -> []; Just x -> [x]
       flags = genPackageFlags d
       dt = defTree (fromJust . condLibrary $ d) flags
       deps' = map prettyShow $ fst dt
