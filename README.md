@@ -1,6 +1,6 @@
 # Usage
 ```sh
-cabal2rpm PATH_TO_CABAL_FILE <name | descr | deps | pkgconf ?
+cabal2rpm <name | descr | deps | pkgconf > PATH_TO_CABAL_FILE
 ```
 
 # Examples
