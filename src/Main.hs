@@ -23,6 +23,7 @@ data PkgInfo = PI { ver :: String
                   , descr :: String
                   , deps :: [String]
                   , pkgconf :: [String]
+                  , libs :: [String]
                   }
   deriving (Eq, Show)
 
@@ -41,6 +42,7 @@ main = do
     "descr" -> putStrLn $ descr pinfo
     "deps"  -> putStrLn $ intercalate "\n" $ deps pinfo
     "pkgconf" -> putStrLn $ intercalate "\n" $ pkgconf pinfo
+    "libs" -> putStrLn $ intercalate "\n" $ libs pinfo
 
 defTree :: (Monoid d, Monoid a) => CondTree ConfVar d a -> [Flag] -> (d, a)
 defTree t fs = simplifyCondTree toDef t
@@ -58,9 +60,11 @@ parseDeps d =
       dt = defTree (fromJust . condLibrary $ d) flags
       deps' = map prettyShow $ fst dt
       pkgconf' = map prettyShow $ pkgconfigDepends . libBuildInfo . snd $ dt
+      libs' = extraLibs . libBuildInfo . snd $ dt
   in
   PI {ver = prettyShow (package pd)
      ,descr = description pd
      ,deps = deps'
      ,pkgconf = pkgconf'
+     ,libs = libs'
      }
