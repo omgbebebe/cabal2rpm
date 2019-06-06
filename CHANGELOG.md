@@ -1,4 +1,4 @@
-# Revision history for cabal2rpm
+# Revision history for cabal2info
 
 ## 0.1.0.0 -- YYYY-mm-dd
 
